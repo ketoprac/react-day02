@@ -1,8 +1,10 @@
+import EmployeeListRTK from "./components/EmployeeListRTK";
+
 function App() {
   return (
-    <div>
-      Hello world!
-    </div>
+    <>
+      <EmployeeListRTK />
+    </>
   );
 }
 
