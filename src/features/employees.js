@@ -28,7 +28,7 @@ export const employeesSlice = createSlice({
     addSalary: (state, action) => {
       state.value = state.value.map(emp => {
         if(emp.empId === action.payload.id) {
-          emp.salary += 500;
+          emp.salary = Number(emp.salary) + 500;
           return emp;
         }
         return emp;
@@ -37,7 +37,7 @@ export const employeesSlice = createSlice({
     subSalary: (state, action) => {
       state.value = state.value.map(emp => {
         if(emp.empId === action.payload.id) {
-          emp.salary -= 500;
+          emp.salary = Number(emp.salary) - 500;
           return emp;
         }
         return emp;

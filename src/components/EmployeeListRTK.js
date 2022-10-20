@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "./Form";
 import { addEmp, addSalary, subSalary } from "../features/employees";
@@ -8,7 +8,7 @@ export default function EmployeeListRTK() {
   const emp = useSelector((state) => state.employees.value);
   const [display, setDisplay] = useState(false);
   const [values, setValues] = useState({
-    empId: Math.round(Math.random() * 10),
+    empId: Math.round(Math.random() * 100),
     name: "",
     salary: 0,
   });
@@ -73,7 +73,7 @@ export default function EmployeeListRTK() {
           </table>
         </>
       )}
-      <h3>Total Salary : {emp.reduce((sum, el) => sum + el.salary, 0)}</h3>
+      <h3>Total Salary : {emp.reduce((sum, el) => (Number(sum) + Number(el.salary)), 0)}</h3>
     </div>
   );
 }
