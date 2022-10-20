@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "./Form";
 import { addEmp, addSalary, subSalary } from "../features/employees";

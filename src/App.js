@@ -4,8 +4,8 @@ import EmployeeListRTK from "./components/EmployeeListRTK";
 function App() {
   return (
     <>
-      <EmployeeListRTK />
-      {/* <EmployeeListRedux /> */}
+      {/* <EmployeeListRTK /> */}
+      <EmployeeListRedux />
     </>
   );
 }
