@@ -3,7 +3,7 @@ import CountryView from "./components/Country/CountryView";
 
 function App() {
   return (
-    <div>
+    <div className="justify-center">
       {/* <RegionView /> */}
       <CountryView />
     </div>

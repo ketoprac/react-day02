@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CountryApi from "../../api/CountryApi";
+import Button from "../Button";
+import Input from "../Input";
 
 const CountryEditForm = ({ id, setShow, onClick }) => {
   const [country, setCountry] = useState([]);
@@ -36,10 +38,10 @@ const CountryEditForm = ({ id, setShow, onClick }) => {
 
   return (
     <>
-      <h2>Update Country</h2>
-      <form onSubmit={updateData}>
+      <h2 className="text-3xl font-bold">Update Country</h2>
+      <form onSubmit={updateData} className="mb-6 flex flex-col gap-y-2 w-4/12">
         <label htmlFor="countryId">Country ID:</label>
-        <input
+        <Input
           type="text"
           name="countryId"
           defaultValue={country.countryId}
@@ -47,14 +49,14 @@ const CountryEditForm = ({ id, setShow, onClick }) => {
           disabled
         />
         <label htmlFor="countryName">Country Name:</label>
-        <input
+        <Input
           type="text"
           name="countryName"
           defaultValue={country.countryName}
           onChange={handleChange("countryName")}
         />
-        <button type="submit">Update</button>
-        <button onClick={onClick}>Cancel</button>
+        <Button type="submit">Update</Button>
+        <Button onClick={onClick}>Cancel</Button>
       </form>
     </>
   );

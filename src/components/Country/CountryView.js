@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CountryApi from "../../api/CountryApi";
+import Button from "../Button";
 import CountryEditForm from "./CountryEditForm";
 import CountryForm from "./CountryForm";
 
@@ -28,7 +29,7 @@ const CountryView = () => {
   }, [countries]);
 
   return (
-    <div>
+    <div className="flex flex-col pt-6 justify-center items-center">
       {show ? (
         <CountryEditForm
           setShow={setShow}
@@ -38,27 +39,28 @@ const CountryView = () => {
       ) : (
         <>
           <CountryForm />
-          <h2>List Country</h2>
-          <table>
+          <h2 className="text-3xl font-bold mb-4">List Country</h2>
+          <table className="border w-7/12">
             <thead>
               <tr>
                 <th>Country ID</th>
                 <th>Country Name</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {countries &&
                 countries.map((country) => (
                   <tr key={country.countryId}>
-                    <td>{country.countryId}</td>
+                    <td className="font-bold text-center">{country.countryId}</td>
                     <td>{country.countryName}</td>
-                    <td>
-                      <button onClick={() => showEdit(country.countryId)}>
-                        Edit Country
-                      </button>
-                      <button onClick={() => deleteData(country.countryId)}>
-                        Delete Country
-                      </button>
+                    <td className="flex justify-center">
+                      <Button onClick={() => showEdit(country.countryId)}>
+                        Edit
+                      </Button>
+                      <Button onClick={() => deleteData(country.countryId)}>
+                        Delete
+                      </Button>
                     </td>
                   </tr>
                 ))}
