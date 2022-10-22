@@ -1,7 +1,11 @@
+import RegionView from "./components/Region/RegionView";
+import CountryView from "./components/Country/CountryView";
+
 function App() {
   return (
     <div>
-      Hello world!
+      {/* <RegionView /> */}
+      <CountryView />
     </div>
   );
 }
