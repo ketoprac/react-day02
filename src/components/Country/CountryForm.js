@@ -12,10 +12,12 @@ const CountryForm = () => {
   const handleChange = (name) => (e) => {
     setValues({ ...values, [name]: e.target.value });
   };
-
+  
   const addData = async (e) => {
     e.preventDefault();
-    await CountryApi.addCountry(values).then((res) => console.log(res));
+    await CountryApi.addCountry(values);
+    window.alert("Country added successfully!");
+    window.location.reload();
   };
 
   return (

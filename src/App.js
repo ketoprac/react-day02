@@ -4,8 +4,8 @@ import CountryView from "./components/Country/CountryView";
 function App() {
   return (
     <div className="justify-center">
-      {/* <RegionView /> */}
-      <CountryView />
+      <RegionView />
+      {/* <CountryView /> */}
     </div>
   );
 }

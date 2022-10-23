@@ -40,7 +40,7 @@ const CountryView = () => {
         <>
           <CountryForm />
           <h2 className="text-3xl font-bold mb-4">List Country</h2>
-          <table className="border w-7/12">
+          <table className="border w-7/12 mb-8">
             <thead>
               <tr>
                 <th>Country ID</th>

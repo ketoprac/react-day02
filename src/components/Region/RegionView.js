@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RegionApi from "../../api/RegionApi";
+import Button from "../Button";
 import RegionEditForm from "./RegionEditForm";
 import RegionForm from "./RegionForm";
 
@@ -26,7 +27,8 @@ function Region() {
       regionName: region,
     };
     try {
-      await RegionApi.addRegion(payload);
+      const res = await RegionApi.addRegion(payload);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -43,7 +45,7 @@ function Region() {
   }, [regions]);
 
   return (
-    <div>
+    <div className="flex flex-col pt-6 justify-center items-center">
       {show ? (
         <RegionEditForm
           setShow={setShow}
@@ -57,21 +59,25 @@ function Region() {
             value={region}
             onChange={(e) => setRegion(e.target.value)}
           />
-          <h2>List Region</h2>
-          <table>
+          <h2 className="text-3xl font-bold mb-4">List Region</h2>
+          <table className="border w-5/12 mb-8">
+            <thead>
+              <tr>
             <th>Region ID</th>
             <th>Region Name</th>
+              </tr>
+            </thead>
             <tbody>
               {regions &&
                 regions.map((region) => (
                   <tr key={region.regionId}>
-                    <td>{region.regionId}</td>
+                    <td className="font-bold text-center">{region.regionId}</td>
                     <td>{region.regionName}</td>
-                    <td>
-                      <button onClick={() => showEdit(region.regionId)}>Edit Region</button>
-                      <button onClick={() => deleteData(region.regionId)}>
-                        Delete Region
-                      </button>
+                    <td className="flex justify-center">
+                      <Button onClick={() => showEdit(region.regionId)}>Edit</Button>
+                      <Button onClick={() => deleteData(region.regionId)}>
+                        Delete
+                      </Button>
                     </td>
                   </tr>
                 ))}

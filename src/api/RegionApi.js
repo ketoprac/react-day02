@@ -21,12 +21,11 @@ const deleteRegion = async (id) => {
 
 const addRegion = async (payload) => {
   try {
-    const formData = new FormData(payload);
-    const result = await axios.post(`${config.domain}/api/region`, formData, {
-      headers: {
-        "Content-type": "multipart/form-date"
-      },
-    });
+    const formData = new FormData();
+    formData.append("regionName", payload.regionName);
+    formData.append("regionId", payload.regionId);
+    console.log(formData);
+    const result = await axios.post(`${config.domain}/api/region`, formData);
     return result;
   } catch (error) {
     return await error.message;
@@ -35,9 +34,12 @@ const addRegion = async (payload) => {
 
 const updateRegion = async (data) => {
   try {
+    const formData = new FormData();
+    formData.append("regionId", data.regionId);
+    formData.append("regionName", data.regionName);
     const result = await axios.put(
       `${config.domain}/api/region/${data.regionId}`,
-      data
+      formData
     );
     return result;
   } catch (error) {

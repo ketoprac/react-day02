@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RegionApi from "../../api/RegionApi";
+import Button from "../Button";
+import Input from "../Input";
 
 const RegionEditForm = ({ onClick, id, setShow }) => {
   const [region, setRegion] = useState([]);
@@ -34,10 +36,10 @@ const RegionEditForm = ({ onClick, id, setShow }) => {
 
   return (
     <>
-      <h2>Update Region</h2>
-      <form onSubmit={(e) => updateData(e)}>
+      <h2 className="text-3xl font-bold">Update Region</h2>
+      <form onSubmit={(e) => updateData(e)} className="mb-6 flex flex-col gap-y-2 w-4/12">
         <label htmlFor="regionId">Region ID:</label>
-        <input
+        <Input
           type="text"
           name="regionId"
           defaultValue={region.regionId}
@@ -45,14 +47,14 @@ const RegionEditForm = ({ onClick, id, setShow }) => {
           disabled
         />
         <label htmlFor="regionName">Region Name:</label>
-        <input
+        <Input
           type="text"
           name="regionName"
           defaultValue={region.regionName}
           onChange={handleChange("regionName")}
         />
-        <button type="submit">Update</button>
-        <button onClick={onClick}>Cancel</button>
+        <Button type="submit">Update</Button>
+        <Button onClick={onClick}>Cancel</Button>
       </form>
     </>
   );
