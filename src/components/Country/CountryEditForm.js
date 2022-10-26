@@ -12,7 +12,7 @@ const CountryEditForm = ({ id, setShow, onClick }) => {
 
   useEffect(() => {
     CountryApi.getCountry(id).then((res) => {
-      setCountry(res.data);
+      setCountry(res);
     });
   }, [id]);
 

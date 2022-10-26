@@ -43,7 +43,7 @@ const updateCountry = async (data) => {
 const getCountry = async (id) => {
   try {
     const result = await axios.get(`${config.domain}/api/country/${id}`);
-    return result;
+    return result.data;
   } catch (error) {
     return await error.message;
   }

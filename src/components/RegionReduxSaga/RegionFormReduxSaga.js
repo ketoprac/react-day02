@@ -1,17 +1,23 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import RegionApi from "../../api/RegionApi";
+import { useDispatch } from "react-redux";
+import { AddRegionRequest } from "../../redux-saga/Action/RegionAction";
+import * as Yup from "yup";
 import Button from "../Button";
 import Input from "../Input";
 
-const RegionFormFormik = () => {
+const RegionFormReduxSaga = () => {
+  const dispatch = useDispatch();
   const [previewFile, setPreviewFile] = useState();
   const [previewImage, setPreviewImage] = useState();
   const [uploaded, setUploaded] = useState(false);
   const [uploadedFile, setUploadedFile] = useState(false);
+  const validationSchema = Yup.object().shape({
+    regionName: Yup.string('Enter Region Name').required("Region Name is required")
+  })
   const formik = useFormik({
     initialValues: {
-      regionName: "",
+      regionName: '',
       file: undefined,
       foto: undefined,
     },
@@ -21,10 +27,9 @@ const RegionFormFormik = () => {
       payload.append("file", values.file);
       payload.append("foto", values.foto);
 
-      await RegionApi.addRegion(payload).then(() => {
-        window.alert("Data successfully inserted!");
-        window.location.reload();
-      });
+      dispatch(AddRegionRequest(payload));
+      window.alert("Region successfully added!");
+      window.location.reload();
     },
   });
 
@@ -105,7 +110,7 @@ const RegionFormFormik = () => {
           label="Region File: "
           name="file"
           type="file"
-          accept="image/*"
+          accept='image/*'
           onChange={uploadFileOnChange("files")}
           onBlur={formik.handleBlur}
         />
@@ -136,7 +141,7 @@ const RegionFormFormik = () => {
           name="foto"
           type="file"
           onChange={uploadOnChange("file")}
-          accept="image/*"
+          accept='image/*'
           onBlur={formik.handleBlur}
         />
         <Button type="submit">Add</Button>
@@ -145,4 +150,4 @@ const RegionFormFormik = () => {
   );
 };
 
-export default RegionFormFormik;
+export default RegionFormReduxSaga;

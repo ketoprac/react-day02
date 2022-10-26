@@ -34,14 +34,16 @@ const addRegion = async (payload) => {
 };
 
 const updateRegion = async (data) => {
+  const id = parseInt(data.get('regionId'));
   try {
-    const formData = new FormData();
-    formData.append("regionId", data.regionId);
-    formData.append("regionName", data.regionName);
-    const result = await axios.put(
-      `${config.domain}/api/region/${data.regionId}`,
-      formData
-    );
+    // const formData = new FormData();
+    // formData.append("regionId", data.regionId);
+    // formData.append("regionName", data.regionName);
+    // const result = await axios.put(
+    //   `${config.domain}/api/region/${data.regionId}`,
+    //   formData
+    // );
+    const result = await axios.put(`${config.domain}/api/region/${id}`, data);
     return result;
   } catch (error) {
     return await error.message;
@@ -51,7 +53,7 @@ const updateRegion = async (data) => {
 const getRegion = async (id) => {
   try {
     const result = await axios.get(`${config.domain}/api/region/${id}`);
-    return result;
+    return result.data;
   } catch (error) {
     return await error.message;
   }

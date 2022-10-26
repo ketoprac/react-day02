@@ -8,13 +8,13 @@ const RegionForm = () => {
 
   const addData = async (e) => {
     e.preventDefault();
-    const payload = {
-      regionId: Math.round(Math.random() * 100),
-      regionName: region,
-    };
+    let payload = new FormData();
+    payload.append("regionId", Math.random() * 100);
+    payload.append("regionName", region);
     try {
-      const res = await RegionApi.addRegion(payload);
-      console.log(res.data);
+      await RegionApi.addRegion(payload);
+      window.alert("Region added successfully!");
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }

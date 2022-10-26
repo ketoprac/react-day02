@@ -1,5 +1,5 @@
+import RegionReduxSaga from "./components/RegionReduxSaga/RegionViewReduxSaga";
 import RegionView from "./components/Region/RegionView";
-import CountryView from "./components/Country/CountryView";
 import RegionFormik from "./components/RegionFormik/RegionViewFormik";
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
       {/* <RegionView /> */}
       {/* <CountryView /> */}
       <RegionFormik />
+      {/* <RegionReduxSaga /> */}
     </div>
   );
 }

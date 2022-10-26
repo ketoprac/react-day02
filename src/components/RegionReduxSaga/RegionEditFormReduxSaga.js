@@ -1,32 +1,43 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { EditRegionRequest, GetOneRegionRequest } from "../../redux-saga/Action/RegionAction";
 import RegionApi from "../../api/RegionApi";
 import Button from "../Button";
 import Input from "../Input";
 
-const RegionFormFormik = () => {
+const RegionEditFormReduxSaga = ({ onClick, id }) => {
+  const dispatch = useDispatch();
+  const {region} = useSelector(state => state.regionStated);
   const [previewFile, setPreviewFile] = useState();
   const [previewImage, setPreviewImage] = useState();
   const [uploaded, setUploaded] = useState(false);
   const [uploadedFile, setUploadedFile] = useState(false);
+  useEffect(() => {
+    dispatch(GetOneRegionRequest(id));
+  }, []);
+  
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      regionName: "",
-      file: undefined,
-      foto: undefined,
+      regionId: id,
+      regionName: region.regionName,
+      file: region.regionFile,
+      foto: region.regionPhoto
     },
-    onSubmit: async (values) => {
+    onSubmit:async(values) => {
       let payload = new FormData();
-      payload.append("regionName", values.regionName);
-      payload.append("file", values.file);
-      payload.append("foto", values.foto);
+      payload.append('regionId',values.regionId);
+      payload.append('regionName',values.regionName);
+      payload.append('file',values.file);
+      payload.append('foto',values.foto);
 
-      await RegionApi.addRegion(payload).then(() => {
-        window.alert("Data successfully inserted!");
-        window.location.reload();
-      });
-    },
-  });
+      dispatch(EditRegionRequest(payload));
+      window.alert('Region Successfully Updated');
+      window.location.reload();
+
+    }
+  })
 
   const uploadOnChange = (name) => (event) => {
     let reader = new FileReader();
@@ -64,19 +75,18 @@ const RegionFormFormik = () => {
     setPreviewFile(null);
   };
 
+
   return (
     <>
-      <form
-        onSubmit={formik.handleSubmit}
-        className="mb-6 flex flex-col gap-y-2 w-4/12"
-      >
-        <Input
+      <form onSubmit={formik.handleSubmit} className="mb-6 flex flex-col gap-y-2 w-4/12">
+      <Input
           name="regionName"
           label="Region Name: "
           type="text"
           onChange={formik.handleChange}
           value={formik.values.regionName}
           onBlur={formik.handleBlur}
+          autoComplete="regionName"
         />
         <br />
         {uploadedFile === false ? (
@@ -105,8 +115,9 @@ const RegionFormFormik = () => {
           label="Region File: "
           name="file"
           type="file"
-          accept="image/*"
           onChange={uploadFileOnChange("files")}
+          accept='image/*'
+          // value={formik.values.file}
           onBlur={formik.handleBlur}
         />
         <br />
@@ -136,13 +147,15 @@ const RegionFormFormik = () => {
           name="foto"
           type="file"
           onChange={uploadOnChange("file")}
-          accept="image/*"
+          accept='image/*'
+          // value={formik.values.foto}
           onBlur={formik.handleBlur}
         />
-        <Button type="submit">Add</Button>
+        <Button type="button" onClick={formik.handleSubmit}>Update</Button>
+        <Button onClick={onClick}>Cancel</Button>
       </form>
     </>
   );
 };
 
-export default RegionFormFormik;
+export default RegionEditFormReduxSaga;

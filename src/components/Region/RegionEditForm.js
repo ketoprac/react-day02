@@ -6,15 +6,15 @@ import Input from "../Input";
 const RegionEditForm = ({ onClick, id, setShow }) => {
   const [region, setRegion] = useState([]);
   const [values, setValues] = useState({
-    regionId: undefined,
-    regionName: undefined,
+    regionId: 0,
+    regionName: '',
   });
 
   useEffect(() => {
     RegionApi.getRegion(id).then((res) => {
-      setRegion(res.data);
+      setRegion(res);
     });
-  }, [id]);
+  }, []);
 
   const handleChange = (name) => (e) => {
     setValues({ ...values, [name]: e.target.value });
@@ -22,13 +22,13 @@ const RegionEditForm = ({ onClick, id, setShow }) => {
 
   const updateData = async (e) => {
     e.preventDefault();
-    const payload = {
-      regionId: id,
-      regionName: values.regionName,
-    };
+    let payload = new FormData();
+    payload.append("regionId", id);
+    payload.append("regionName", values.regionName);
     await RegionApi.updateRegion(payload).then((res) => {
       setShow(false);
-      window.alert("Data Successfully Updated!");
+      window.alert("Region successfully updated!");
+      // window.location.reload();
     }).catch((err) => {
       console.log(err);
     });
@@ -37,17 +37,18 @@ const RegionEditForm = ({ onClick, id, setShow }) => {
   return (
     <>
       <h2 className="text-3xl font-bold">Update Region</h2>
-      <form onSubmit={(e) => updateData(e)} className="mb-6 flex flex-col gap-y-2 w-4/12">
-        <label htmlFor="regionId">Region ID:</label>
+      <br />
+      <form onSubmit={updateData} className="mb-6 flex flex-col gap-y-2 w-4/12">
         <Input
+          label="Region ID: "
           type="text"
           name="regionId"
           defaultValue={region.regionId}
           onChange={handleChange("regionId")}
           disabled
-        />
-        <label htmlFor="regionName">Region Name:</label>
+          />
         <Input
+          label="Region Name: "
           type="text"
           name="regionName"
           defaultValue={region.regionName}
