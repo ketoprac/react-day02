@@ -6,7 +6,6 @@ import RegionForm from "./RegionForm";
 
 function Region() {
   const [regions, setRegions] = useState([]);
-  const [region, setRegion] = useState("");
   const [show, setShow] = useState(false);
   const [id, setId] = useState();
 
@@ -20,25 +19,10 @@ function Region() {
     window.alert("Data Successfully Deleted!");
   };
 
-  const addData = async (e) => {
-    e.preventDefault();
-    const payload = {
-      regionId: Math.round(Math.random() * 100),
-      regionName: region,
-    };
-    try {
-      const res = await RegionApi.addRegion(payload);
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-    setRegion("");
-  };
-
   const showEdit = (id) => {
     setShow(true);
     setId(id);
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -54,17 +38,13 @@ function Region() {
         />
       ) : (
         <>
-          <RegionForm
-            onSubmit={addData}
-            value={region}
-            onChange={(e) => setRegion(e.target.value)}
-          />
+          <RegionForm />
           <h2 className="text-3xl font-bold mb-4">List Region</h2>
           <table className="border w-5/12 mb-8">
             <thead>
               <tr>
-            <th>Region ID</th>
-            <th>Region Name</th>
+                <th>Region ID</th>
+                <th>Region Name</th>
               </tr>
             </thead>
             <tbody>
@@ -74,7 +54,9 @@ function Region() {
                     <td className="font-bold text-center">{region.regionId}</td>
                     <td>{region.regionName}</td>
                     <td className="flex justify-center">
-                      <Button onClick={() => showEdit(region.regionId)}>Edit</Button>
+                      <Button onClick={() => showEdit(region.regionId)}>
+                        Edit
+                      </Button>
                       <Button onClick={() => deleteData(region.regionId)}>
                         Delete
                       </Button>
