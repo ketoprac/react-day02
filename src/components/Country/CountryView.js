@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import CountryApi from "../../api/CountryApi";
 import CountryEditForm from "./CountryEditForm";
 import CountryForm from "./CountryForm";
@@ -29,6 +30,10 @@ const CountryView = () => {
 
   return (
     <div className="flex flex-col pt-6 items-center">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Country</title>
+      </Helmet>
       {show ? (
         <CountryEditForm
           setShow={setShow}
@@ -38,7 +43,9 @@ const CountryView = () => {
       ) : (
         <>
           <CountryForm />
-          <h2 className="text-2xl font-semibold mt-10 mb-6 text-gray-800">Countries</h2>
+          <h2 className="text-2xl font-semibold mt-10 mb-6 text-gray-800">
+            Countries
+          </h2>
           <table className="border w-5/12 mb-8">
             <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
               <tr>
@@ -54,9 +61,14 @@ const CountryView = () => {
                     <td className="font-bold text-center px-6">
                       {country.countryId}
                     </td>
-                    <td className="py-3 uppercase font-medium">{country.countryName}</td>
+                    <td className="py-3 uppercase font-medium">
+                      {country.countryName}
+                    </td>
                     <td className="flex justify-center">
-                      <button onClick={() => showEdit(country.countryId)} className="p-3 hover:bg-gray-300 rounded-full">
+                      <button
+                        onClick={() => showEdit(country.countryId)}
+                        className="p-3 hover:bg-gray-300 rounded-full"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -72,7 +84,10 @@ const CountryView = () => {
                           />
                         </svg>
                       </button>
-                      <button onClick={() => deleteData(country.countryId)} className="p-3 hover:bg-gray-300 rounded-full">
+                      <button
+                        onClick={() => deleteData(country.countryId)}
+                        className="p-3 hover:bg-gray-300 rounded-full"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

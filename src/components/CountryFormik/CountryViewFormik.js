@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import CountryApi from "../../api/CountryApi";
 import CountryEditFormFormik from "./CountryEditFormFormik";
 import CountryFormFormik from "./CountryFormFormik";
@@ -29,6 +30,10 @@ const CountryViewFormik = () => {
 
   return (
     <div className="flex flex-col pt-6 items-center">
+            <Helmet>
+        <meta charSet="utf-8" />
+        <title>Country | Formik</title>
+      </Helmet>
       {show ? (
         <CountryEditFormFormik
           setShow={setShow}
@@ -37,7 +42,8 @@ const CountryViewFormik = () => {
         />
       ) : (
         <>
-          <span className="text-3xl font-semibold text-gray-700 mb-4 border py-3 px-3 rounded-md bg-gray-100">
+            <span className="text-lg font-semibold text-gray-700 mb-4 border py-3 px-3 rounded-md bg-gray-100 flex items-center gap-2">
+            <img src="https://user-images.githubusercontent.com/4060187/61057426-4e5a4600-a3c3-11e9-9114-630743e05814.png" className="w-12" alt="Formik Logo" />
             Formik
           </span>
           <CountryFormFormik />

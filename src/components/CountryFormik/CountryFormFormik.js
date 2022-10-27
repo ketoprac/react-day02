@@ -2,13 +2,19 @@ import { useFormik } from "formik";
 import CountryApi from "../../api/CountryApi";
 import Button from "../Button";
 import Input from "../Input";
+import * as Yup from "yup";
 
 const CountryFormFormik = () => {
+  const validationSchema = Yup.object().shape({
+    countryId: Yup.string("Enter Country Id").required("Country Id is required"),
+    countryName: Yup.string("Enter Country Name").required("Country Name is required")
+  });
   const formik = useFormik({
     initialValues: {
       countryId: "",
       countryName: "",
     },
+    validationSchema: validationSchema,
     onSubmit: async (values) => {
       let payload = {
         countryId: values.countryId,
@@ -36,6 +42,7 @@ const CountryFormFormik = () => {
           onChange={formik.handleChange}
           value={formik.values.countryId}
         />
+          {formik.touched.countryId && formik.errors.countryId ? <span className="font-bold text-xs text-red-600">{formik.errors.countryId}</span> : null}
         <Input
           label="Country Name"
           type="text"
@@ -43,6 +50,7 @@ const CountryFormFormik = () => {
           onChange={formik.handleChange}
           value={formik.values.countryName}
         />
+          {formik.touched.countryName && formik.errors.countryName ? <span className="font-bold text-xs text-red-600">{formik.errors.countryName}</span> : null}
         <Button type="submit">Add</Button>
       </form>
     </>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetCountryRequest,
@@ -28,6 +29,10 @@ const CountryViewReduxSaga = () => {
 
   return (
     <div className="flex flex-col pt-6 items-center">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Country | Redux Saga</title>
+      </Helmet>
       {show ? (
         <CountryEditFormReduxSaga
           setShow={setShow}
@@ -36,8 +41,19 @@ const CountryViewReduxSaga = () => {
         />
       ) : (
         <>
-          <span className="text-3xl font-semibold text-gray-700 mb-4 border py-3 px-3 rounded-md bg-gray-100">
-            Redux Saga + Formik
+          <span className="text-lg font-semibold text-gray-700 mb-4 border py-3 px-3 rounded-md bg-gray-100 flex items-center gap-2">
+            <img
+              src="https://redux-saga.js.org/img/Redux-Saga-Logo.png"
+              className="w-12"
+              alt="Redux Saga Logo"
+            />
+            Redux Saga +
+            <img
+              src="https://user-images.githubusercontent.com/4060187/61057426-4e5a4600-a3c3-11e9-9114-630743e05814.png"
+              className="w-12"
+              alt="Formik Logo"
+            />
+            Formik
           </span>
           <CountryFormReduxSaga />
           <h2 className="text-2xl font-semibold mt-10 mb-6 text-gray-800">

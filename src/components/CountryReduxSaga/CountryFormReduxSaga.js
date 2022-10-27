@@ -17,6 +17,7 @@ const CountryFormReduxSaga = () => {
       countryId: "",
       countryName: "",
     },
+    validationSchema: validationSchema,
     onSubmit: async (values) => {
       let payload = {
         countryId: values.countryId,
@@ -42,14 +43,16 @@ const CountryFormReduxSaga = () => {
           name="countryId"
           onChange={formik.handleChange}
           value={formik.values.countryId}
-        />
+          />
+          {formik.touched.countryId && formik.errors.countryId ? <span className="font-bold text-xs text-red-600">{formik.errors.countryId}</span> : null}
         <Input
           label="Country Name"
           type="text"
           name="countryName"
           onChange={formik.handleChange}
           value={formik.values.countryName}
-        />
+          />
+          {formik.touched.countryName && formik.errors.countryName ? <span className="font-bold text-xs text-red-600">{formik.errors.countryName}</span> : null}
         <Button type="submit">Add</Button>
       </form>
     </>

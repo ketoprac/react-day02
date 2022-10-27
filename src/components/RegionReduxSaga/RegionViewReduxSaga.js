@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DelRegionRequest, GetRegionRequest } from "../../redux-saga/Action/RegionAction";
+import {
+  DelRegionRequest,
+  GetRegionRequest,
+} from "../../redux-saga/Action/RegionAction";
 import RegionEditFormReduxSaga from "./RegionEditFormReduxSaga";
 import RegionFormReduxSaga from "./RegionFormReduxSaga";
 
@@ -8,10 +11,10 @@ function RegionReduxSaga() {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [id, setId] = useState();
-  const {regions} = useSelector(state=>state.regionStated);
+  const { regions } = useSelector((state) => state.regionStated);
 
   useEffect(() => {
-    dispatch(GetRegionRequest())
+    dispatch(GetRegionRequest());
   }, []);
 
   const deleteData = async (id) => {
@@ -25,7 +28,9 @@ function RegionReduxSaga() {
 
   return (
     <div className="flex flex-col pt-6 justify-center items-center">
-      <h1 className="text-4xl font-bold mb-3">CRUD Region with Formik & Redux Saga</h1>
+      <h1 className="text-4xl font-bold mb-3">
+        CRUD Region with Formik & Redux Saga
+      </h1>
       <br />
       {show ? (
         <RegionEditFormReduxSaga
@@ -35,7 +40,7 @@ function RegionReduxSaga() {
         />
       ) : (
         <>
-          <RegionFormReduxSaga/>
+          <RegionFormReduxSaga />
           <table className="border w-5/12 mb-8 table-auto">
             <thead>
               <tr className="bg-gray-100">
@@ -48,7 +53,9 @@ function RegionReduxSaga() {
               {regions &&
                 regions.map((region) => (
                   <tr key={region.regionId}>
-                    <td className="font-bold text-center p-2">{region.regionId}</td>
+                    <td className="font-bold text-center p-2">
+                      {region.regionId}
+                    </td>
                     <td>{region.regionName}</td>
                     <td className="flex justify-center">
                       <button onClick={() => showEdit(region.regionId)}>
@@ -67,7 +74,10 @@ function RegionReduxSaga() {
                           />
                         </svg>
                       </button>
-                      <button className="ml-1" onClick={() => deleteData(region.regionId)}>
+                      <button
+                        className="ml-1"
+                        onClick={() => deleteData(region.regionId)}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

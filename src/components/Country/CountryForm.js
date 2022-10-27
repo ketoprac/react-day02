@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import CountryApi from "../../api/CountryApi";
 import Button from "../Button";
 import Input from "../Input";
+import * as Yup from "yup";
 
 const CountryForm = () => {
+  const validationSchema = Yup.object().shape({
+    countryId: Yup.string("Enter Country Id").required("Country Id is required"),
+    countryName: Yup.string("Enter Country Name").required("Country Name is required")
+  });
+
   const [values, setValues] = useState({
     countryId: undefined,
     countryName: undefined,
