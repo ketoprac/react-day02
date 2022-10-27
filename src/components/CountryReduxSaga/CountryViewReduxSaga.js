@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
-import CountryApi from "../../api/CountryApi";
-import CountryEditForm from "./CountryEditForm";
-import CountryForm from "./CountryForm";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GetCountryRequest,
+  DelCountryRequest,
+} from "../../redux-saga/Action/CountryAction";
+import CountryEditFormReduxSaga from "./CountryEditFormReduxSaga";
+import CountryFormReduxSaga from "./CountryFormReduxSaga";
 
-const CountryView = () => {
-  const [countries, setCountries] = useState([]);
+const CountryViewReduxSaga = () => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [id, setId] = useState();
+  const { countries } = useSelector((state) => state.countryStated);
 
-  const getData = async () => {
-    const data = await CountryApi.getCountries();
-    setCountries(data);
-  };
+  useEffect(() => {
+    dispatch(GetCountryRequest());
+  }, []);
 
   const deleteData = async (id) => {
-    await CountryApi.deleteCountry(id);
-    window.alert("Data Successfully Deleted!");
+    dispatch(DelCountryRequest(id));
   };
 
   const showEdit = (id) => {
@@ -23,22 +26,23 @@ const CountryView = () => {
     setId(id);
   };
 
-  useEffect(() => {
-    getData();
-  }, [countries]);
-
   return (
     <div className="flex flex-col pt-6 items-center">
       {show ? (
-        <CountryEditForm
+        <CountryEditFormReduxSaga
           setShow={setShow}
           id={id}
           onClick={() => setShow(false)}
         />
       ) : (
         <>
-          <CountryForm />
-          <h2 className="text-2xl font-semibold mt-10 mb-6 text-gray-800">Countries</h2>
+          <span className="text-3xl font-semibold text-gray-700 mb-4 border py-3 px-3 rounded-md bg-gray-100">
+            Redux Saga + Formik
+          </span>
+          <CountryFormReduxSaga />
+          <h2 className="text-2xl font-semibold mt-10 mb-6 text-gray-800">
+            Countries
+          </h2>
           <table className="border w-5/12 mb-8">
             <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
               <tr>
@@ -54,9 +58,14 @@ const CountryView = () => {
                     <td className="font-bold text-center px-6">
                       {country.countryId}
                     </td>
-                    <td className="py-3 uppercase font-medium">{country.countryName}</td>
+                    <td className="py-3 uppercase font-medium">
+                      {country.countryName}
+                    </td>
                     <td className="flex justify-center">
-                      <button onClick={() => showEdit(country.countryId)} className="p-3 hover:bg-gray-300 rounded-full">
+                      <button
+                        onClick={() => showEdit(country.countryId)}
+                        className="p-3 hover:bg-gray-300 rounded-full"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -72,7 +81,10 @@ const CountryView = () => {
                           />
                         </svg>
                       </button>
-                      <button onClick={() => deleteData(country.countryId)} className="p-3 hover:bg-gray-300 rounded-full">
+                      <button
+                        onClick={() => deleteData(country.countryId)}
+                        className="p-3 hover:bg-gray-300 rounded-full"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -99,4 +111,4 @@ const CountryView = () => {
   );
 };
 
-export default CountryView;
+export default CountryViewReduxSaga;

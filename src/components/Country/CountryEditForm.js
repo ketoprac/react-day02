@@ -38,18 +38,18 @@ const CountryEditForm = ({ id, setShow, onClick }) => {
 
   return (
     <>
-      <h2 className="text-3xl font-bold">Update Country</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Update Country "{country.countryName}"</h2>
       <form onSubmit={updateData} className="mb-6 flex flex-col gap-y-2 w-4/12">
-        <label htmlFor="countryId">Country ID:</label>
         <Input
+          label="Country Id"
           type="text"
           name="countryId"
           defaultValue={country.countryId}
           onChange={handleChange("countryId")}
           disabled
         />
-        <label htmlFor="countryName">Country Name:</label>
         <Input
+          label="Country Name"
           type="text"
           name="countryName"
           defaultValue={country.countryName}

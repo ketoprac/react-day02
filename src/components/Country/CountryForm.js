@@ -22,17 +22,17 @@ const CountryForm = () => {
 
   return (
     <>
-      <h2 className="text-3xl font-bold">Add Country</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Add Country</h2>
       <form onSubmit={addData} className="mb-6 flex flex-col gap-y-2 w-4/12">
-        <label htmlFor="country-id">Country Id:</label>
         <Input
+          label="Country Id"
           type="text"
           name="country-id"
           onChange={handleChange("countryId")}
           value={values.countryId}
         />
-        <label htmlFor="country-name">Country Name:</label>
         <Input
+          label="Country Name"
           type="text"
           name="country-name"
           onChange={handleChange("countryName")}

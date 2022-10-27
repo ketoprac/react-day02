@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EditRegionRequest, GetOneRegionRequest } from "../../redux-saga/Action/RegionAction";
-import RegionApi from "../../api/RegionApi";
 import Button from "../Button";
 import Input from "../Input";
 
