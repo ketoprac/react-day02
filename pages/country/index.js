@@ -51,8 +51,7 @@ const Country = () => {
   return (
     <div className="flex flex-col pt-6 items-center">
       <Head>
-        <meta charSet="utf-8" />
-        <title>Country CRUD</title>
+        <title>Country CRUD | Next Redux Saga</title>
       </Head>
       <span className="text-lg font-semibold text-gray-700 mb-4 border py-3 px-3 rounded-md bg-gray-100 flex items-center gap-2">
         <img
@@ -68,9 +67,9 @@ const Country = () => {
         />
         Formik
       </span>
-      <div className="flex items-center justify-between mt-10 mb-2 w-5/12">
+      <div className="flex items-center justify-between mt-10 mb-2 md:w-5/12 sm:8/12">
         <div className="flex items-center">
-          <h2 className="text-2xl font-semibold  text-gray-800">Countries</h2>
+          <h2 className="sm:text-sm md:text-2xl font-semibold  text-gray-800">Countries</h2>
           <Link href="/country/add">
             <button className="p-3 hover:bg-gray-300 rounded-full">
               <svg
@@ -98,7 +97,7 @@ const Country = () => {
           />
         </div>
       </div>
-      <table className="w-5/12 mb-8">
+      <table className="md:w-5/12 mb-8">
         <thead className="text-xs font-semibold uppercase text-gray-500 bg-gray-100">
           <tr>
             <th className="py-2">Country ID</th>
